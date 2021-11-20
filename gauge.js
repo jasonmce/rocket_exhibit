@@ -1,30 +1,14 @@
-var randomScalingFactor = function() {
-  return Math.round(Math.random() * 100);
-};
-
-var randomData = function () {
-  return [
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor()
-  ];
-};
-
-var randomValue = function (data) {
-  return Math.max.apply(null, data) * Math.random();
-};
-
-var data = randomData();
-var value = randomValue(data);
+function secondsSinceEpochMod100() {
+  return Math.round(Date.now() / 1000) % 100;
+}
 
 var config = {
   type: 'gauge',
   data: {
     labels: ['Success', 'Warning', 'Warning', 'Error'],
     datasets: [{
-      data: data,
-      value: value,
+      data: [40, 70, 90, 100],
+      value: secondsSinceEpochMod100(),
       backgroundColor: ['green', 'yellow', 'orange', 'red'],
       borderWidth: 2
     }]
@@ -69,3 +53,10 @@ document.getElementById('randomizeData').addEventListener('click', function() {
 
   window.myGauge.update();
 });
+
+setInterval(function() {
+  value = secondsSinceEpochMod100();
+  config.data.datasets[0].value = value;
+  console.log('here' + value);
+  window.myGauge.update();
+}, 2000);
