@@ -1,14 +1,10 @@
-function secondsSinceEpochMod100() {
-  return Math.round(Date.now() / 1000) % 100;
-}
-
 var config = {
   type: 'gauge',
   data: {
     labels: ['Success', 'Warning', 'Warning', 'Error'],
     datasets: [{
       data: [40, 70, 90, 100],
-      value: secondsSinceEpochMod100(),
+      value: -1,
       backgroundColor: ['green', 'yellow', 'orange', 'red'],
       borderWidth: 2
     }]
@@ -45,18 +41,11 @@ window.onload = function() {
   window.myGauge = new Chart(ctx, config);
 };
 
-document.getElementById('randomizeData').addEventListener('click', function() {
-  config.data.datasets.forEach(function(dataset) {
-    dataset.data = randomData();
-    dataset.value = randomValue(dataset.data);
-  });
-
-  window.myGauge.update();
-});
-
 setInterval(function() {
-  value = secondsSinceEpochMod100();
-  config.data.datasets[0].value = value;
-  console.log('here' + value);
-  window.myGauge.update();
+  fetch('/pressure')
+    .then(response => response.json())
+    .then(data => {
+      config.data.datasets[0].value = data.psi;
+      window.myGauge.update();
+    });
 }, 2000);

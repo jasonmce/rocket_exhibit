@@ -8,6 +8,10 @@ const app = express();
 app.use(express.json());
 app.use(express.static("express"));// default URL for website
 
+app.get('/pressure', function(req, res){
+   var pressure = Math.round(Date.now() / 1000) % 100;
+   res.status(200).send({ psi: pressure });
+});
 app.all('*', function (req, res, next) {
    res.sendFile(path.join(__dirname+req.url));
 });
