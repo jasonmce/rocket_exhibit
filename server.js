@@ -8,9 +8,35 @@ const app = express();
 app.use(express.json());
 app.use(express.static("express"));// default URL for website
 
+
+const mcpadc = require('mcp-spi-adc');
+
+var pressure_reading = -1;
+const tempSensor = mcpadc.openMcp3008(5, {speedHz: 20000}, err => {
+    console.log("in");
+    if (err) {
+       console.log("Did you remember to enable SPI on the raspberry pi?");
+       throw err;
+    }
+
+    console.log("through");
+
+   setInterval(_ => {
+      tempSensor.read((err, reading) => {
+         if (err) throw err;
+         pressure_reading = reading.value * 100;
+         console.log(pressure_reading);
+      });
+   }, 250);
+});
+
+
+
+
+
 app.get('/pressure', function(req, res){
    var pressure = Math.round(Date.now() / 1000) % 100;
-   res.status(200).send({ psi: pressure });
+   res.status(200).send({ psi: pressure_reading });
 });
 app.all('*', function (req, res, next) {
    res.sendFile(path.join(__dirname+req.url));
