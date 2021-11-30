@@ -1,16 +1,26 @@
+'use strict';
+/*jshint esversion: 6 */
+/* jshint node: true */
 /**
  * Uses Express to handle web requests.
  *
- *
+ * Requests for /pressure return a psi pressure, all others go straight through
+ * to the file system.
  */
-
-'use strict';
 
 class httpd {
 
-  pressure_object;
+  pressure_object = 0;
 
-  constructor(pressure_obj) {
+  /**
+   * Creates an Express based object to handle web requests.
+   *
+   * @param {int} port
+   *   Port to listen to.  Usually 3000 for nodejs apps.
+   * @param {Pressure} pressure_obj
+   *   A pressure object we can get a reading from.
+   */
+  constructor(port, pressure_obj) {
     this.pressure_object = pressure_obj;
 
     const http = require('http');
@@ -19,11 +29,10 @@ class httpd {
     const app = express();
 
     app.use(express.json());
-    app.use(express.static("express"));// default URL for website
+    app.use(express.static("express"));
 
     // Return the current pressure as psi:value for /pressure requests.
     app.get('/pressure', function (req, res) {
-      // res.status(200).send({psi: pressure_reading});
       res.status(200).send({psi: pressure_obj.latest_pressure});
     });
     // All other requests are routed normally.
@@ -32,7 +41,6 @@ class httpd {
     });
 
     const server = http.createServer(app);
-    const port = 3000;
     server.listen(port);
     console.debug('Server listening on port ' + port);
   }

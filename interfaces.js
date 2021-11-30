@@ -1,13 +1,15 @@
 'use strict';
+/*jshint esversion: 6 */
+/* jshint node: true */
 
 /**
  * Button and valve functionality.
  *
  * The system has four interfaces:
- *   Launch button - input - normally open
- *   Pressure sensor - input - normal atmosphere pressure
- *   Launch valve - output - normally off / sealed
- *   Relief valve - output - normally off / sealed
+ *   Launch button - input - normally open.
+ *   Pressure sensor - input - normal atmosphere pressure.
+ *   Launch valve - output - normally off / sealed.
+ *   Relief valve - output - normally off / sealed.
  *
  * System Normal:
  * The system should be at rest with both valves closed, the button un-pressed,
@@ -42,7 +44,6 @@ class DigitalInterfaces {
    constructor() {
       var Gpio = require('onoff').Gpio;
 
-
       // Create interface objects.
       this.rocketValve = new Gpio(20, 'out');
       this.reliefValve = new Gpio(21, 'out');
@@ -53,9 +54,9 @@ class DigitalInterfaces {
        *
        * Pressing the launch button, when enabled, launches the rocket.
        */
-      this.launchButton.watch((err, button_value) {
+      this.launchButton.watch((err, button_value) => {
          if (err) {
-            console.error('There was an error', err);
+            console.error('There was an error:', err);
             return;
          }
          // Only launch on positive edge trigger while the button is enabled.
@@ -63,9 +64,6 @@ class DigitalInterfaces {
             this.launchRocket();
          }
       });
-
-
-
    }
    /**
     * Shut the relief valve and stop the check timer once pressure is low enough.
@@ -111,9 +109,10 @@ class DigitalInterfaces {
    launchRocket() {
       this.launchButtonEnabled = false;
       this.openRocketValve();
-      setTimeout(this.closeRocketValve, this.launchValveOpenDuration);
+      var self = this;
+      setTimeout(this.closeRocketValve.bind(this), this.launchValveOpenDuration);
       setTimeout(
-        () { this.launchButtonEnabled = true;},
+        function () { self.launchButtonEnabled = true;},
         this.launchButtonDelay
       );
    }
@@ -122,12 +121,10 @@ class DigitalInterfaces {
    /*
     * Free GPIO resources when the program terminates.
     */
-   unexportOnClose() { //to run when exiting program
+   unexportOnClose() {
       this.closeRocketValve();
       this.rocketValve.unexport();
       this.launchButton.unexport();
    }
-
-   // process.on('SIGINT', unexportOnClose); //to run when user closes using ctrl+c
 }
 module.exports = DigitalInterfaces
