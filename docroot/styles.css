@@ -1,5 +1,6 @@
 /* CSS to apply or alter in the fullscreen mode*/
 @media all and (display-mode: fullscreen) {
+  /* Hide cursor in kiosk mode. */
   body {
     cursor: none;
   }
