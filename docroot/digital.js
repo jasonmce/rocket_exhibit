@@ -8,10 +8,15 @@ class Digital {
   }
 
   init(canvas) {
-    this.element = canvas;
+    var heading = document.createElement("heading");
+    heading.innerHTML = "Pressure in PSI";
+    this.content = document.createElement("div");
+    this.content.classList.add("content");
+    canvas.appendChild(heading);
+    canvas.appendChild(this.content);
   }
 
   updatePressure(pressure) {
-    this.element.innerHTML = pressure.toFixed(2);
+    this.content.innerHTML = pressure.toFixed(2);
   }
 }

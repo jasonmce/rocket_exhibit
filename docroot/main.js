@@ -5,8 +5,8 @@
 var gauge = new Gauge();
 var digital = new Digital();
 window.onload = function() {
-  gauge.init(window.document.getElementById('chart'));
-  digital.init(window.document.getElementById('digital'));
+  gauge.init(document.getElementById('chart'));
+  digital.init(document.getElementById('digital'));
 };
 
 setInterval(function() {

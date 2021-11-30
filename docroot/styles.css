@@ -13,5 +13,11 @@
 
 #digital {
   font-family: Digital;
+  text-align: center;
+}
+#digital heading {
+  font-size: 4em;
+}
+#digital .content {
   font-size: 10em;
 }
