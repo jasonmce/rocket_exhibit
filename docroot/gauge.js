@@ -11,11 +11,11 @@ class Gauge {
     this.config = {
       type: 'gauge',
       data: {
-        labels: ['Success', 'Warning', 'Warning', 'Error'],
+        labels: ['Low', 'Medium', 'High'],
         datasets: [{
-          data: [40, 70, 90, 100],
+          data: [40, 80, 100],
           value: -1,
-          backgroundColor: ['green', 'yellow', 'orange', 'red'],
+          backgroundColor: ['green', 'orange', 'red'],
           borderWidth: 2
         }]
       },
@@ -41,7 +41,7 @@ class Gauge {
           color: 'rgba(0, 0, 0, 1)'
         },
         valueLabel: {
-          formatter: Math.round
+          display: false,
         }
       }
     };
