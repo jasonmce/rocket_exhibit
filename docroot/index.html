@@ -5,9 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gauge Chart</title>
+  <link rel="stylesheet" href="styles.css">
   <script src="/node_modules/chartjs-gauge/node_modules/chart.js/dist/Chart.bundle.js"></script>
   <script src="/node_modules/chartjs-gauge/dist/chartjs-gauge.js"></script>
   <script src="/gauge.js"></script>
+  <script src="/digital.js"></script>
+  <script src="/main.js"></script>
   <style>
     canvas {
       -moz-user-select: none;
@@ -18,10 +21,13 @@
 </head>
 
 <body>
-  <div id="canvas-holder" style="width:100%">
+  <div id="chart-canvas-holder" style="width:50%">
     <canvas id="chart"></canvas>
-    <canvas id="relationship"></canvas>
   </div>
+  <div id="digital-canvas-holder" style="width:50%">
+    <div id="digital"></div>
+  </div>
+
 </body>
 
 </html>

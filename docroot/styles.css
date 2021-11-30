@@ -1,0 +1,16 @@
+/* CSS to apply or alter in the fullscreen mode*/
+@media all and (display-mode: fullscreen) {
+  body {
+    cursor: none;
+  }
+}
+
+@font-face {
+  font-family: Digital;
+  src: url('fonts/Digital Dismay.otf');
+}
+
+#digital {
+  font-family: Digital;
+  font-size: 10em;
+}
