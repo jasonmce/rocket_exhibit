@@ -33,6 +33,16 @@ class Pressure {
     });
     console.log("pressure object created and interval timer started");
   }
+
+  /**
+   * The last pressure value recorded.
+   *
+   * @returns int
+   *   The current latest_pressure property value.
+   */
+  getPsi() {
+    return this.latest_pressure;
+  }
 }
 
 module.exports = Pressure;
