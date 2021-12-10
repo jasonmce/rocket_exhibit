@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+  <title>Gauge Chart</title>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gauge Chart</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="stylesheet" href="/styles.css">
   <script src="/node_modules/chartjs-gauge/node_modules/chart.js/dist/Chart.bundle.js"></script>
   <script src="/node_modules/chartjs-gauge/dist/chartjs-gauge.js"></script>
   <script src="/gauge.js"></script>
@@ -21,10 +23,10 @@
 </head>
 
 <body>
-  <div id="chart-canvas-holder" style="width:50%">
+  <div class="widget-holder" id="chart-canvas-holder" style="width:50%">
     <canvas id="chart"></canvas>
   </div>
-  <div id="digital-canvas-holder" style="width:50%">
+  <div class="widget-holder" id="digital-canvas-holder" style="width:50%">
     <div id="digital"></div>
   </div>
 

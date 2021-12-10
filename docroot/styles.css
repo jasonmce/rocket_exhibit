@@ -6,13 +6,26 @@
   }
 }
 
+body {
+  background-image: url("images/51671901569_f5cec8cfe4_5k.jpg");
+  background-size: cover;
+}
+
+.widget-holder {
+  border-radius: 25px;
+  background-color: rgb(255, 255, 255, 0.5);
+  margin: 1em;
+}
+
+/*
 @font-face {
   font-family: Digital;
   src: url('fonts/Digital Dismay.otf');
 }
+*/
 
 #digital {
-  font-family: Digital;
+  /* font-family: Digital; */
   text-align: center;
 }
 #digital heading {
