@@ -27,6 +27,7 @@ npm install
 sudo npm install pm2 -g
 sudo pm2 start server.js
 sudo pm2 startup
+sudo pm2 save
 
 # Disable the screensaver and add our chromium-browser statement to autostart.
 if ! grep chromium-browser /etc/xdg/lxsession/LXDE-pi/autostart; then
