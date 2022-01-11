@@ -3,7 +3,7 @@
 /* jshint node: true */
 
 /**
- * Button and valve functionality.
+ * Valve functionality.
  *
  * The system has four interfaces:
  *   Launch button - input - normally open.
@@ -69,13 +69,6 @@ class Valve {
       this.openValve();
       setTimeout(this.closeValve.bind(this), milliseconds);
    }
-
-   /*
-    * Free GPIO resources when the program terminates.
-    */
-   unexportOnClose() {
-      this.closeValve();
-      this.valveGpio.unexport();
-   }
 }
-module.exports = Valve
+
+module.exports = Valve;

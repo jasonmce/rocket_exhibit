@@ -3,13 +3,16 @@
 /* jshint node: true */
 
 /**
- * Button and valve functionality.
+ * Rocket Exhibit.
  *
- * The system has four interfaces:
- *   Launch button - input - normally open.
- *   Pressure sensor - input - normal atmosphere pressure.
- *   Launch valve - output - normally off / sealed.
- *   Relief valve - output - normally off / sealed.
+ * The exhibit consists of # parts:
+ *   Bladder to hold pressurized air.
+ *   User-accessible air pump attached to the bladder.
+ *   Pressure sensor inside the bladder.
+ *   Launch valve between the bladder and the rocket.
+ *   Relief valve to vent the bladder to the atmosphere.
+ *   Launch button.
+ *   RaspberryPi attached to a video display.
  *
  * System Normal:
  * The system should be at rest with both valves closed, the button un-pressed,
@@ -32,11 +35,6 @@
 // Pressure monitor object for the mcp3008 attached sensor.
 var classPressure = require('./pressure.js');
 var pressureSensor = new classPressure();
-
-// Handle the GPIO pin actions and responses.
-// var ButtonsAndValves = require('./interfaces.js');
-// var digital_interfaces = new ButtonsAndValves();
-// process.on('SIGINT', digital_interfaces.unexportOnClose); //to run when user closes using ctrl+c
 
 // Instantiate our valves.
 var Valve = require('./valve.js');

@@ -89,14 +89,6 @@ class Button {
          });
       }
    }
-
-   /*
-    * Free GPIO resources when the program terminates.
-    */
-   unexportOnClose() {
-      this.closeRocketValve();
-      this.rocketValve.unexport();
-      this.launchButton.unexport();
-   }
 }
+
 module.exports = Button;
