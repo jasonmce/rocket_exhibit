@@ -17,7 +17,8 @@ curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install -y nodejs
 
 # Clone the code repository into our home directory.
-git clone https://github.com/jasonmce/rocket_exhibit.git /home/pi/rocket_exhibit
+# git clone https://github.com/jasonmce/rocket_exhibit.git /home/pi/rocket_exhibit
+sudo chown -R pi: /home/pi/rocket_exhibit
 cd /home/pi/rocket_exhibit
 npm install
 
@@ -26,6 +27,7 @@ npm install
 sudo npm install pm2 -g
 sudo pm2 start server.js
 sudo pm2 startup
+sudo pm2 save
 
 # Disable the screensaver and add our chromium-browser statement to autostart.
 if ! grep chromium-browser /etc/xdg/lxsession/LXDE-pi/autostart; then
@@ -35,5 +37,5 @@ xset -dpms
 xset s off
 # Launch kiosk mode browser pointed at our app.
 /usr/bin/chromium-browser --kiosk  --disable-restore-session-state http://localhost:3000
-  """ >> /etc/xdg/lxsession/LXDE-pi/autostart
+  """ | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
 fi
